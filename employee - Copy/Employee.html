@@ -1,0 +1,131 @@
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+</head>
+<body ng-app="Employee">
+	<div class="container"  ng-controller="dashboard">
+		<script>
+		var app=angular.module("Employee",['ngRoute']);
+		app.controller("dashboard",function($scope,$route){
+			$scope.ob="Eid";
+			$scope.empArr=[
+			{Eid:1,Name:"Arun Kumar MN",Domain:"Java"},
+			{Eid:2,Name:"Anil Kumar Desai",Domain:"Java"},
+			{Eid:7,Name:"Somshekhar",Domain:"Java"},
+			{Eid:3,Name:"Adarsh",Domain:"Java"},
+			{Eid:4,Name:"Devraj",Domain:"Java"},
+			{Eid:6,Name:"Shrinivas",Domain:"Java"},
+			{Eid:5,Name:"Hemanth",Domain:"Java"},
+			{Eid:5,Name:"MSA",Domain:"Java"}
+
+			];
+			$scope.setOrderBy=function(o){
+				$scope.ob=o;
+			}
+			$scope.removeEmployee=function(i){
+				/*$scope.empArr.splice(i,1);*/
+				console.log(i)
+				for(var j in $scope.empArr){
+					if(i==$scope.empArr[j].Name){
+						$scope.empArr.splice(j,1);break;
+					}
+
+
+				}
+			}
+
+
+
+		});
+		app.controller("newEmployeeCtrl",function($scope){
+
+			$scope.n={};
+			$scope.addEmployee=function(){
+				$scope.$parent.empArr.push({"Eid":$scope.n.Eid,"Name":$scope.n.Name,"Domain":$scope.n.Domain});
+				$scope.n={};
+
+			};
+
+
+		});
+		app.controller("EmployeeCtrl",function($scope,$route,$routeParams){
+			$scope.emp={};
+
+
+			for(var x in $scope.$parent.empArr)
+			{ 
+				console.log($scope.$parent.empArr[x].Eid);
+
+				if($scope.$parent.empArr[x].Eid==($routeParams.rolno)){
+					$scope.emp.Eid=$scope.$parent.empArr[x].Eid;
+					$scope.emp.Name=$scope.$parent.empArr[x].Name;
+					$scope.emp.Domain=$scope.$parent.empArr[x].Domain;
+					$scope.emp2=$scope.$parent.empArr[x];
+					break;
+				}
+			}
+
+			$scope.editEmployee=function(){
+				$scope.emp2.Eid=$scope.emp.Eid;
+				$scope.emp2.Name=$scope.emp.Name;
+				$scope.emp2.Domain=$scope.emp.Domain;
+				$scope.emp={};
+			}
+
+
+		});
+		app.config(function($routeProvider){
+			$routeProvider
+			.when("/EmployeeEdit/:rolno",{
+				templateUrl:"EmployeeEdit.html",
+				controller:"EmployeeCtrl"
+			});
+
+
+		});
+		</script>
+		<h1 class="text-info">Employee Details</h1>
+		<table class="table table-bordered table-light table-hover">
+			<div class="thead">
+				<tr>
+					<th ng-click="setOrderBy('Eid')">Eid</th>
+					<th ng-click="setOrderBy('Name')">Name</th>
+					<th>Domain</th>
+					<th>Action1</th>
+					<th>Action2</th>
+
+				</tr>
+			</div>
+			<div class="tbody">
+				<tr ng-repeat="emp in empArr |orderBy:ob">
+					<td>{{emp.Eid}}</td>
+					<td>{{emp.Name}}</td>
+					<td>{{emp.Domain}}</td>
+					<td><a href="#!EmployeeEdit/{{emp.Eid}}">Edit</a></td>
+					<td><button ng-click="removeEmployee(emp.Name)" class="btn btn-sm btn-danger">X</button></td>
+				</tr>
+				<tr ng-controller="newEmployeeCtrl">
+					<td> <input type="text" class="form-control" placeholder="Employee Id" ng-model="n.Eid"> </td>
+					<td> <input type="text" class="form-control" placeholder="Name" ng-model="n.Name"></td>
+					<td> <input type="text" class="form-control"  placeholder="Domain" ng-model="n.Domain"></td>
+					<td colspan="2" ><button class="btn btn-sm btn-success" style="width:100%" ng-click="addEmployee()">Add Employee</button></td>
+
+				</tr>
+			</div>
+
+		</table>
+
+		<div class="ng-view"></div>
+	</div>
+
+</body>
+</html>

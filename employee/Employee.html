@@ -1,0 +1,40 @@
+ 
+<div ng-app="Employee">
+	<div class="container" >
+		 
+		<h1 class="text-info">Employee Details</h1>
+		<table class="table table-bordered table-light table-hover">
+			<div class="thead">
+				<tr>
+					<th>Eid</th>
+					<th>Name</th>
+					<th>Domain</th>
+					<th>Action1</th>
+					<th>Action2</th>
+
+				</tr>
+			</div>
+			<div class="tbody">
+				<tr ng-repeat="emp in empArr |orderBy:ob">
+					<td>{{emp.Eid}}</td>
+					<td>{{emp.Name}}</td>
+					<td>{{emp.Domain}}</td>
+					<td><a href="#!EmployeeEdit/{{emp.Eid}}">Edit</a></td>
+					<td><button ng-click="removeEmployee(emp.Name)" class="btn btn-sm btn-danger">X</button></td>
+				</tr>
+				<tr >
+					<td> <input type="text" class="form-control" placeholder="Employee Id" ng-model="n.Eid"> </td>
+					<td> <input type="text" class="form-control" placeholder="Name" ng-model="n.Name"></td>
+					<td> <input type="text" class="form-control"  placeholder="Domain" ng-model="n.Domain"></td>
+					<td colspan="2" ><button class="btn btn-sm btn-success" style="width:100%" ng-click="addEmployee()">Add Employee</button></td>
+
+				</tr>
+			</div>
+
+		</table>
+
+		 
+	</div>
+
+</div>
+ 

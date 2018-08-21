@@ -1,0 +1,46 @@
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+ 
+
+
+	<script type="text/javascript" src="main.js"></script>
+
+
+</head>
+
+<body class="container" ng-app="EMS" ng-controller="appController">
+
+	<script src="app.js"></script>
+	<script src="app-route.js"></script>
+	<script src="appController.js"></script>
+	<script src="dashboard/DashboardModule.js"></script>
+	<script src="dashboard/DashboardController.js"></script>
+	<script src="employee/EmployeeModel.js"></script>
+	<script src="employee/EmployeeController.js"></script>
+
+	<h2 class="text-center text-info">Employee Management System</h2>
+	<a href="#!Dashboard"><button class="btn btn-sm btn-warning">Dashboard</button></a><br><br>
+	<a href="#!Employee"><button class="btn btn-sm btn-warning">Employee </button></a>
+
+	<div ng-view>
+
+
+
+	</div>
+
+</body>
+</html>
+
+ 
+ 

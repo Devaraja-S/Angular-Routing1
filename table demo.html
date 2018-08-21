@@ -1,0 +1,48 @@
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div  ng-controller="tableCtrl"> 
+<table border="2" style="border-color: red">
+<tbody>
+  <tr ng-repeat="x in tableData|limitTo:limit">
+  <th>{{x.th}}</th>
+    <td>{{ x.td1 }}</td>
+    <td>{{ x.td2 }}</td>
+    <td>{{ x.td3}}</td>
+  </tr>
+<tr><td colspan="4"><button ng-click="showhide()"   style="width: 100%">{{text}}</button></td></tr>
+</tbody>
+</table>
+</div>
+<script>
+ var app=angular.module("myApp",[]);
+ app.controller("tableCtrl",function($scope){
+ 		$scope.showhide=function(){//initial limit is 4 you cange it here
+ 		if($scope.showless){$scope.limit=4; $scope.text="Show More";}
+ 		else{ $scope.limit=$scope.tableData.length; $scope.text="Show Less";}
+$scope.showless=!$scope.showless;
+ 	}
+
+ 	$scope.limit=4;
+ 	$scope.showless=true;
+
+//example 10 rows
+$scope.tableData=[{th:"th",td1:"td",td2:"td",td3:"td"},
+					{th:"th",td1:"td",td2:"td",td3:"td"},	
+					{th:"th",td1:"td",td2:"td",td3:"td"},
+					{th:"th",td1:"td",td2:"td",td3:"td"},
+					{th:"th",td1:"td",td2:"td",td3:"td"},
+					{th:"th",td1:"td",td2:"td",td3:"td"},
+					{th:"th",td1:"td",td2:"td",td3:"td"},
+					{th:"th",td1:"td",td2:"td",td3:"td"},
+					{th:"th",td1:"td",td2:"td",td3:"td"},
+					{th:"th",td1:"td",td2:"td",td3:"td"}];
+
+					$scope.showhide();
+	 });
+ 
+</script>
+</body>
+</html>
